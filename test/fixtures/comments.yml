@@ -1,0 +1,16 @@
+few_comments_1:
+  id: 1
+  post_id: 2
+  body: what ever body 1
+
+few_comments_2:
+  id: 2
+  post_id: 2
+  body: what ever body 2
+
+<% (1..10).each do |i| %>
+many_comments_<%= i %>:
+  post: has_many_comments
+  body: what ever body <%= i %>
+<% end %>
+

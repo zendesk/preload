@@ -1,0 +1,7 @@
+test:
+  adapter: mysql
+  encoding: utf8
+  database: preload_test
+  username: root
+  password:
+  host: 127.0.0.1
