@@ -1,6 +1,6 @@
 # Preload
 
-TODO: Write a gem description
+Allows you to split your ActiveRecord find calls and your eager loading decisions.
 
 ## Installation
 
@@ -18,7 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Now in your controller you don't have to know which associations should be eager loaded because your views need them.
+
+### In your controller:
+
+```ruby
+def index
+  @posts = blog.posts.all(:order => 'created_at DESC')
+end
+```
+
+### in your view:
+```
+  <% @posts.preload(:comments) %>
+  ... render posts and their comments ...
+```
+
 
 ## Contributing
 
