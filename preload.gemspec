@@ -4,8 +4,8 @@ require File.expand_path('../lib/preload/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ['Mick Staugaard']
   gem.email         = ['mick@staugaard.com']
-  gem.description   = 'A better API for AcriveRecord eager loading'
-  gem.summary       = 'A better API for AcriveRecord eager loading'
+  gem.description   = 'A better API for ActiveRecord eager loading'
+  gem.summary       = 'A better API for ActiveRecord eager loading'
   gem.homepage      = 'https://github.com/staugaard/preload'
 
   gem.files         = Dir.glob('lib/**/*')
