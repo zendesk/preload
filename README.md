@@ -1,4 +1,4 @@
-# Preload
+# Preload [![Build Status](https://secure.travis-ci.org/staugaard/preload.png?branch=master)](http://travis-ci.org/staugaard/preload)
 
 Allows you to split your ActiveRecord find calls and your eager loading decisions.
 
