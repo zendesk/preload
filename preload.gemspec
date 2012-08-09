@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'appraisal'
   gem.add_development_dependency 'shoulda'
-  gem.add_development_dependency 'mysql'
+  gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'test-unit'
   gem.add_development_dependency 'rake'
 end
