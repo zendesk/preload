@@ -32,7 +32,7 @@ ActiveRecord::Base.connection.class.class_eval do
     $db_queries << sql
     exec_query_without_query_logger(sql, name, binds)
   end
-  alias_method_chain :exec_query, :query_logger if instance_methods.include?(:exec_query)
+  alias_method_chain :exec_query, :query_logger if instance_methods.include?(:exec_query) || instance_methods.include?('exec_query')
 end
 
 class ActiveSupport::TestCase
