@@ -21,3 +21,4 @@ has_many_comments:
   blog: a_blog
   title: many_comments
   author: eric
+  poly: a_blog (Blog)
