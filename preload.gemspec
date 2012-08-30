@@ -12,8 +12,8 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = 'preload'
-  gem.require_paths = ['lib']
   gem.version       = Preload::VERSION
+  gem.license       = "MIT"
 
   gem.add_dependency 'activerecord', '>= 2.3.6', '< 3.3'
 
