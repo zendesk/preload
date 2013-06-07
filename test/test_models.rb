@@ -26,4 +26,5 @@ end
 class Blog < ActiveRecord::Base
   has_many :posts
   has_many :comments, :through => :posts
+  has_many :polies, :class_name => "Post", :as => :poly
 end
