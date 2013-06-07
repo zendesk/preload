@@ -59,6 +59,11 @@ class PreloadTest < ActiveSupport::TestCase
       assert_no_db_queries
     end
 
+    should "mix into WillPaginate::Collection" do
+      collection = WillPaginate::Collection.new(1,1)
+      assert collection.respond_to?(:preload)
+    end
+
     if ActiveRecord::VERSION::STRING > "3.1.0"
       puts "Pending: preloading polymorphic does not work on #{ActiveRecord::VERSION::STRING}"
     else
