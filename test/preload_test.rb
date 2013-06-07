@@ -57,9 +57,26 @@ class PreloadTest < ActiveSupport::TestCase
       end
 
       assert_no_db_queries
-
     end
 
-  end
+    if ActiveRecord::VERSION::STRING > "3.1.0"
+      puts "Pending: preloading polymorphic does not work on #{ActiveRecord::VERSION::STRING}"
+    else
+      should "support nested polymorphic preloading" do
+        @blogs.each do |blog|
+          assert !blog.polies.loaded?
+        end
 
+        @blogs.preload([:polies => {}])
+
+        clear_query_log
+
+        @blogs.each do |blog|
+          assert blog.polies.loaded?
+        end
+
+        assert_no_db_queries
+      end
+    end
+  end
 end
