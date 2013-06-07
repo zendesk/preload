@@ -1,9 +1,10 @@
 # ActiveRecord::Base.logger = Logger.new($stdout)
 # ActiveRecord::Base.logger.level = Logger::DEBUG
 
-ActiveRecord::Base.configurations = YAML::load(IO.read(File.expand_path("database.yml", File.dirname(__FILE__))))
+ActiveRecord::Base.configurations = { "test" => { "adapter" => "sqlite3", "database" => ":memory:" } }
+ActiveRecord::Base.establish_connection("test")
 
-ActiveRecord::Base.establish_connection('test')
+ActiveRecord::Migration.verbose = false
 load(File.dirname(__FILE__) + "/schema.rb")
 
 class Comment < ActiveRecord::Base
