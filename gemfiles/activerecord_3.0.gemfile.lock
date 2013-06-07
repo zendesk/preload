@@ -1,7 +1,7 @@
 PATH
   remote: /Users/staugaard/code/preload
   specs:
-    preload (0.1.2)
+    preload (0.2.0)
       activerecord (>= 2.3.6, < 3.3)
 
 GEM
