@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "debugger"
-gem "iconv", :platforms=>:mri_20
-gem "activerecord", "~> 2.3.6", :require=>"active_record"
+gem "iconv", :platforms => :mri_20
+gem "activerecord", "~> 2.3.6", :require => "active_record"
 
-gemspec :path=>"../"
+gemspec :path => "../"
