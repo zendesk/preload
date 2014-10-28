@@ -9,6 +9,8 @@ gemfile:
   - gemfiles/activerecord_3.1.gemfile
   - gemfiles/activerecord_3.2.gemfile
   - gemfiles/activerecord_4.0.gemfile
+  - gemfiles/activerecord_4.1.gemfile
+  - gemfiles/activerecord_4.2.gemfile
 matrix:
   exclude:
     - rvm: 2.0
