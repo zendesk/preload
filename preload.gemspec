@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.version       = Preload::VERSION
   gem.license       = "MIT"
 
-  gem.add_dependency 'activerecord', '>= 2.3.6', '< 5.0'
+  gem.add_dependency 'activerecord', '>= 3.2', '< 5.0'
 
   gem.add_development_dependency 'appraisal'
   gem.add_development_dependency 'shoulda'
