@@ -30,7 +30,7 @@ end
 
 ### in your view:
 ```
-  <% @posts.preload(:comments) %>
+  <% @posts.pre_load(:comments) %>
   ... render posts and their comments ...
 ```
 

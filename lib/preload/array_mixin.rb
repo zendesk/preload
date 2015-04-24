@@ -2,7 +2,7 @@ require 'active_record'
 
 module Preload
   module ArrayMixin
-    def preload(*associations)
+    def pre_load(*associations)
       return if empty?
 
       if ActiveRecord::VERSION::MAJOR > 4 || (ActiveRecord::VERSION::MAJOR == 4 && ActiveRecord::VERSION::MINOR > 0)
@@ -17,4 +17,3 @@ module Preload
     end
   end
 end
-
