@@ -1,24 +1,13 @@
-require 'rubygems'
+require 'bundler/setup'
 
-require 'bundler'
-Bundler.setup
-Bundler.require(:default, :development)
-
-if defined?(Debugger)
-  ::Debugger.start
-  ::Debugger.settings[:autoeval] = true if ::Debugger.respond_to?(:settings)
-end
-
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/rg'
 require 'active_support'
 require 'active_record'
 require 'active_record/fixtures'
-
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'preload'
 
-require 'test_models'
+require_relative 'test_models'
 
 $db_queries = []
 
@@ -36,16 +25,12 @@ ActiveRecord::Base.connection.class.class_eval do
   alias_method_chain :exec_query, :query_logger if instance_methods.include?(:exec_query) || instance_methods.include?('exec_query')
 end
 
-class ActiveSupport::TestCase
-  include ActiveRecord::TestFixtures
+# Use ActiveSupport::TestCase for everything that was not matched before
+MiniTest::Spec::DSL::TYPES[-1] = [//, ActiveSupport::TestCase]
 
-  def create_fixtures(*table_names)
-    if block_given?
-      Fixtures.create_fixtures(Test::Unit::TestCase.fixture_path, table_names) { yield }
-    else
-      Fixtures.create_fixtures(Test::Unit::TestCase.fixture_path, table_names)
-    end
-  end
+class ActiveSupport::TestCase
+  extend MiniTest::Spec::DSL
+    include ActiveRecord::TestFixtures
 
   self.use_transactional_fixtures = true
 
@@ -67,5 +52,5 @@ class ActiveSupport::TestCase
 end
 
 ActiveSupport::TestCase.fixture_path = File.dirname(__FILE__) + "/fixtures/"
-$LOAD_PATH.unshift(ActiveSupport::TestCase.fixture_path)
 ActiveSupport::TestCase.fixtures :all
+ActiveSupport.test_order = :random if ActiveSupport.respond_to?(:test_order=)

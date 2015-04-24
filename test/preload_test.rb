@@ -1,87 +1,90 @@
-require File.expand_path("helper", File.dirname(__FILE__))
+require_relative 'helper'
 
-class PreloadTest < ActiveSupport::TestCase
+describe Preload do
+  before do
+    @blogs = Blog.all
+    assert @blogs.size > 1
+    clear_query_log
+  end
 
-  context Preload do
-
-    setup do
-      @blogs = Blog.all
-      assert @blogs.size > 1
-      clear_query_log
+  it "preloads associations" do
+    @blogs.each do |blog|
+      assert !blog.posts.loaded?
     end
 
-    should "preload associations" do
-      @blogs.each do |blog|
-        assert !blog.posts.loaded?
-      end
+    @blogs.pre_load(:posts)
 
-      @blogs.preload(:posts)
+    @blogs.each do |blog|
+      assert blog.posts.loaded?
+    end
+  end
 
-      @blogs.each do |blog|
-        assert blog.posts.loaded?
-      end
+  it "does not do anything if the association is already preloaded" do
+    @blogs.pre_load(:posts)
+
+    assert_db_queries
+
+    clear_query_log
+    @blogs.pre_load(:posts)
+    assert_no_db_queries
+
+    @blogs = Blog.includes(:posts).to_a
+    clear_query_log
+    @blogs.pre_load(:posts)
+    assert_no_db_queries
+  end
+
+  it "supports nested preloading" do
+    @blogs.each do |blog|
+      assert !blog.posts.loaded?
     end
 
-    should "not do anything if the association is already preloaded" do
-      @blogs.preload(:posts)
+    @blogs.pre_load(:posts => { :comments => { :author => {} } })
 
-      assert_db_queries
+    clear_query_log
 
-      clear_query_log
-      @blogs.preload(:posts)
-      assert_no_db_queries
-
-      @blogs = Blog.all(:include => :posts)
-      clear_query_log
-      @blogs.preload(:posts)
-      assert_no_db_queries
-    end
-
-    should "support nested preloading" do
-      @blogs.each do |blog|
-        assert !blog.posts.loaded?
-      end
-
-      @blogs.preload(:posts => { :comments => { :author => {} } })
-
-      clear_query_log
-
-      @blogs.each do |blog|
-        assert blog.posts.loaded?
-        blog.posts.each do |post|
-          assert post.comments.loaded?
-          post.comments.each do |comment|
-            assert comment.author.present?
-          end
+    @blogs.each do |blog|
+      assert blog.posts.loaded?
+      blog.posts.each do |post|
+        assert post.comments.loaded?
+        post.comments.each do |comment|
+          assert comment.author.present?
         end
       end
+    end
+
+    assert_no_db_queries
+  end
+
+  it "mixes into WillPaginate::Collection" do
+    collection = WillPaginate::Collection.new(1,1)
+    assert collection.respond_to?(:pre_load)
+  end
+
+  it "supports nested polymorphic preloading" do
+    pending("Pending: preloading polymorphic does not work on #{ActiveRecord::VERSION::STRING}") do
+      @blogs.each do |blog|
+        assert !blog.polies.loaded?
+      end
+
+      @blogs.preload([:polies => {}])
+
+      clear_query_log
+
+      @blogs.each do |blog|
+        assert blog.polies.loaded?
+      end
 
       assert_no_db_queries
     end
+  end
 
-    should "mix into WillPaginate::Collection" do
-      collection = WillPaginate::Collection.new(1,1)
-      assert collection.respond_to?(:preload)
-    end
 
-    if ActiveRecord::VERSION::STRING > "3.1.0"
-      puts "Pending: preloading polymorphic does not work on #{ActiveRecord::VERSION::STRING}"
-    else
-      should "support nested polymorphic preloading" do
-        @blogs.each do |blog|
-          assert !blog.polies.loaded?
-        end
-
-        @blogs.preload([:polies => {}])
-
-        clear_query_log
-
-        @blogs.each do |blog|
-          assert blog.polies.loaded?
-        end
-
-        assert_no_db_queries
-      end
-    end
+  def pending(reason)
+    yield
+  rescue Minitest::Assertion, StandardError
+    skip reason
+  else
+    raise "Test passes"
   end
 end
