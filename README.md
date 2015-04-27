@@ -1,20 +1,12 @@
-# Preload [![Build Status](https://secure.travis-ci.org/staugaard/preload.png?branch=master)](http://travis-ci.org/staugaard/preload)
+# Preload [![Build Status](https://travis-ci.org/zendesk/preload.png?branch=master)](http://travis-ci.org/zendesk/preload)
 
 Allows you to split your ActiveRecord find calls and your eager loading decisions.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'preload'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install preload
+```
+gem install preload
+```
 
 ## Usage
 
@@ -24,7 +16,7 @@ Now in your controller you don't have to know which associations should be eager
 
 ```ruby
 def index
-  @posts = blog.posts.all(:order => 'created_at DESC')
+  @posts = blog.posts.order('created_at DESC')
 end
 ```
 
