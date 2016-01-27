@@ -12,17 +12,21 @@ require_relative 'test_models'
 $db_queries = []
 
 ActiveRecord::Base.connection.class.class_eval do
-  def execute_with_query_logger(query, name = nil)
+  def execute_with_query_logger(query, *args)
     $db_queries << query
-    execute_without_query_logger(query, name)
+    execute_without_query_logger(query, *args)
   end
-  alias_method_chain :execute, :query_logger
+  alias_method :execute_without_query_logger, :execute
+  alias_method :execute, :execute_with_query_logger
 
-  def exec_query_with_query_logger(sql, name = nil, binds = [])
+  def exec_query_with_query_logger(sql, *args)
     $db_queries << sql
-    exec_query_without_query_logger(sql, name, binds)
+    exec_query_without_query_logger(sql, *args)
   end
-  alias_method_chain :exec_query, :query_logger if instance_methods.include?(:exec_query) || instance_methods.include?('exec_query')
+  if instance_methods.include?(:exec_query) || instance_methods.include?('exec_query')
+    alias_method :exec_query_without_query_logger, :exec_query
+    alias_method :exec_query, :exec_query_with_query_logger
+  end
 end
 
 # Use ActiveSupport::TestCase for everything that was not matched before
