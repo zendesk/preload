@@ -2,7 +2,7 @@ require_relative 'helper'
 
 describe Preload do
   before do
-    @blogs = Blog.all
+    @blogs = Blog.all.to_a
     assert @blogs.size > 1
     clear_query_log
   end
