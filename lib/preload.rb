@@ -8,5 +8,5 @@ begin
   require 'will_paginate'
   require 'will_paginate/collection'
   WillPaginate::Collection.send(:include, Preload::ArrayMixin)
-rescue LoadError => e
+rescue LoadError
 end
