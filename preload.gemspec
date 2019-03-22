@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'wwtd'
   gem.add_development_dependency 'bump'
-  gem.add_development_dependency 'sqlite3'
+  gem.add_development_dependency 'sqlite3', '~> 1.3.6'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'minitest-rg'
