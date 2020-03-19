@@ -11,11 +11,10 @@ Gem::Specification.new do |gem|
   gem.version       = Preload::VERSION
   gem.license       = "MIT"
 
-  gem.add_dependency 'activerecord', '>= 3.2', '< 6'
+  gem.add_dependency 'activerecord', '>= 3.2', '< 6.1'
 
   gem.add_development_dependency 'wwtd'
   gem.add_development_dependency 'bump'
-  gem.add_development_dependency 'sqlite3', '~> 1.3.6'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'minitest-rg'
