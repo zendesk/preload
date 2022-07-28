@@ -5,12 +5,10 @@ module Preload
     def pre_load(*associations)
       return if empty?
 
-      if ActiveRecord::VERSION::MAJOR >= 4
+      if ActiveRecord::VERSION::MAJOR >= 7
+        ActiveRecord::Associations::Preloader.new(records: self, associations: associations).call
+      elsif ActiveRecord::VERSION::MAJOR >= 5
         ActiveRecord::Associations::Preloader.new.preload(self, associations)
-      elsif defined?(ActiveRecord::Associations::Preloader)
-        ActiveRecord::Associations::Preloader.new(self, associations).run
-      elsif ActiveRecord::Base.respond_to?(:preload_associations, true)
-        first.class.send(:preload_associations, self, associations)
       else
         raise "Unsupported version of ActiveRecord"
       end
