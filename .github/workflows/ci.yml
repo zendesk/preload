@@ -1,0 +1,25 @@
+name: ci
+on: push
+jobs:
+  main:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby:
+          - 2.7
+        gemfile:
+          - rails5.0
+          - rails5.1
+          - rails5.2
+          - rails6.0
+          - rails6.1
+    env:
+      BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}.gemfile
+    steps:
+      - uses: zendesk/checkout@v2
+      - uses: zendesk/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - run: bundle exec rake test
