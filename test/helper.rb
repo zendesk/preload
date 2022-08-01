@@ -14,14 +14,14 @@ $db_queries = []
 ActiveRecord::Base.connection.class.class_eval do
   def execute_with_query_logger(query, *args)
     $db_queries << query
-    execute_without_query_logger(query, *args)
+    execute_without_query_logger(query, args)
   end
   alias_method :execute_without_query_logger, :execute
   alias_method :execute, :execute_with_query_logger
 
   def exec_query_with_query_logger(sql, *args)
     $db_queries << sql
-    exec_query_without_query_logger(sql, *args)
+    exec_query_without_query_logger(sql, args)
   end
   if instance_methods.include?(:exec_query) || instance_methods.include?('exec_query')
     alias_method :exec_query_without_query_logger, :exec_query

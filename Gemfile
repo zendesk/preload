@@ -1,3 +1,4 @@
 source 'https://rubygems.org'
 
-gemspec
+eval_gemfile('gemfiles/rails7.0.gemfile')
+
