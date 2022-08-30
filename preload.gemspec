@@ -13,7 +13,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'activerecord', '>= 5.0', '< 7.1'
 
-  gem.add_development_dependency 'wwtd'
   gem.add_development_dependency 'bump'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'minitest'
