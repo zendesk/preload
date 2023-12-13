@@ -17,6 +17,7 @@ jobs:
           - rails6.0
           - rails6.1
           - rails7.0
+          - rails7.1
         exclude:
           - ruby: 3.0
             gemfile: rails5.0
