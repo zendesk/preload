@@ -30,10 +30,10 @@ ActiveRecord::Base.connection.class.class_eval do
 end
 
 # Use ActiveSupport::TestCase for everything that was not matched before
-MiniTest::Spec::DSL::TYPES[-1] = [//, ActiveSupport::TestCase]
+Minitest::Spec::DSL::TYPES[-1] = [//, ActiveSupport::TestCase]
 
 class ActiveSupport::TestCase
-  extend MiniTest::Spec::DSL
+  extend Minitest::Spec::DSL
     include ActiveRecord::TestFixtures
 
   if ActiveRecord::VERSION::MAJOR < 5
