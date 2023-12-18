@@ -27,6 +27,14 @@ ActiveRecord::Base.connection.class.class_eval do
     alias_method :exec_query_without_query_logger, :exec_query
     alias_method :exec_query, :exec_query_with_query_logger
   end
+  def select_all_with_query_logger(sql, *args)
+    $db_queries << sql
+    select_all_without_query_logger(sql, args)
+  end
+  if instance_methods.include?(:select_all) || instance_methods.include?('select_all')
+    alias_method :select_all_without_query_logger, :select_all
+    alias_method :select_all, :select_all_with_query_logger
+  end
 end
 
 # Use ActiveSupport::TestCase for everything that was not matched before
