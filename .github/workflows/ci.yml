@@ -7,9 +7,9 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - 2.7
-          - 3.0
-          - 3.1
+          - '2.7'
+          - '3.0'
+          - '3.1'
         gemfile:
           - rails5.0
           - rails5.1
@@ -19,25 +19,25 @@ jobs:
           - rails7.0
           - rails7.1
         exclude:
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: rails5.0
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: rails5.1
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: rails5.2
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: rails6.0
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: rails6.1
-          - ruby: 3.1
+          - ruby: '3.1'
             gemfile: rails5.0
-          - ruby: 3.1
+          - ruby: '3.1'
             gemfile: rails5.1
-          - ruby: 3.1
+          - ruby: '3.1'
             gemfile: rails5.2
-          - ruby: 3.1
+          - ruby: '3.1'
             gemfile: rails6.0
-          - ruby: 3.1
+          - ruby: '3.1'
             gemfile: rails6.1
     env:
       BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}.gemfile
