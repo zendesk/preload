@@ -49,8 +49,14 @@ jobs:
             gemfile: rails5.2
           - ruby: '3.2'
             gemfile: rails6.0
-          - ruby: '3.2'
-            gemfile: rails6.1
+          - ruby: '3.3'
+            gemfile: rails5.0
+          - ruby: '3.3'
+            gemfile: rails5.1
+          - ruby: '3.3'
+            gemfile: rails5.2
+          - ruby: '3.3'
+            gemfile: rails6.0
     env:
       BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}.gemfile
     steps:
