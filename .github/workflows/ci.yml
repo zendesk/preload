@@ -22,8 +22,6 @@ jobs:
           - ruby: '3.1'
             gemfile: rails6.1
         include:
-          - {ruby: '2.7', gemfile: rails5.0}
-          - {ruby: '2.7', gemfile: rails5.1}
           - {ruby: '2.7', gemfile: rails5.2}
           - {ruby: '2.7', gemfile: rails6.0}
     env:
