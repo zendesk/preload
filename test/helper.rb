@@ -44,11 +44,7 @@ class ActiveSupport::TestCase
   extend Minitest::Spec::DSL
     include ActiveRecord::TestFixtures
 
-  if ActiveRecord::VERSION::MAJOR < 5
-    self.use_transactional_fixtures = true
-  else
-    self.use_transactional_tests = true
-  end
+  self.use_transactional_tests = true
 
   self.use_instantiated_fixtures  = false
 
