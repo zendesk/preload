@@ -63,6 +63,10 @@ class ActiveSupport::TestCase
   end
 end
 
-ActiveSupport::TestCase.fixture_path = File.dirname(__FILE__) + "/fixtures/"
+if ActiveRecord.gem_version >= Gem::Version.new("7.2")
+  ActiveSupport::TestCase.fixture_paths << File.dirname(__FILE__) + "/fixtures/"
+else
+  ActiveSupport::TestCase.fixture_path = File.dirname(__FILE__) + "/fixtures/"
+end
 ActiveSupport::TestCase.fixtures :all
 ActiveSupport.test_order = :random if ActiveSupport.respond_to?(:test_order=)
