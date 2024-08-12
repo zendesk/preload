@@ -44,11 +44,7 @@ class ActiveSupport::TestCase
   extend Minitest::Spec::DSL
     include ActiveRecord::TestFixtures
 
-  if ActiveRecord::VERSION::MAJOR < 5
-    self.use_transactional_fixtures = true
-  else
-    self.use_transactional_tests = true
-  end
+  self.use_transactional_tests = true
 
   self.use_instantiated_fixtures  = false
 
@@ -67,6 +63,10 @@ class ActiveSupport::TestCase
   end
 end
 
-ActiveSupport::TestCase.fixture_path = File.dirname(__FILE__) + "/fixtures/"
+if ActiveRecord.gem_version >= Gem::Version.new("7.2")
+  ActiveSupport::TestCase.fixture_paths << File.dirname(__FILE__) + "/fixtures/"
+else
+  ActiveSupport::TestCase.fixture_path = File.dirname(__FILE__) + "/fixtures/"
+end
 ActiveSupport::TestCase.fixtures :all
 ActiveSupport.test_order = :random if ActiveSupport.respond_to?(:test_order=)
