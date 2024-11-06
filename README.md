@@ -1,4 +1,4 @@
-# Preload [![Build Status](https://travis-ci.org/zendesk/preload.png?branch=master)](http://travis-ci.org/zendesk/preload)
+# Preload [![CI status](https://github.com/zendesk/preload/actions/workflows/ci.yml/badge.svg)](https://github.com/zendesk/preload/actions/workflows/ci.yml)
 
 Allows you to split your ActiveRecord find calls and your eager loading decisions.
 
