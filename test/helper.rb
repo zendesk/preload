@@ -2,6 +2,7 @@ require 'bundler/setup'
 
 require 'minitest/autorun'
 require 'minitest/rg'
+require 'logger'
 require 'active_support'
 require 'active_record'
 require 'active_record/fixtures'
