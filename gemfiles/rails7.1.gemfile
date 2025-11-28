@@ -1,6 +1,10 @@
 source "https://rubygems.org"
 
-gem "activerecord", "~> 7.1.0", :require => "active_record"
+gem "activerecord", "~> 7.1.0", require: "active_record"
 gem "sqlite3", "~> 1.4"
 
 gemspec path: "../"
+gem "base64"
+gem "bigdecimal"
+gem "drb"
+gem "mutex_m"
